@@ -9,17 +9,19 @@ from dotenv import load_dotenv
 
 db.init_db()
 # --- Securely load Gemini Pro API Key ---
-load_dotenv()
-gemini_api_key = os.getenv("GEMINI_API_KEY")
+# load_dotenv()
+# gemini_api_key = os.getenv("GEMINI_API_KEY")
 
-if not gemini_api_key:
-    st.error("Gemini Pro API key not found. Please set it in your .env file.")
-    st.stop()
-else:
-    genai.configure(api_key=gemini_api_key)
-    model = genai.GenerativeModel('gemini-2.0-flash')
+# if not gemini_api_key:
+#     st.error("Gemini Pro API key not found. Please set it in your .env file.")
+#     st.stop()
+# else:
+#     genai.configure(api_key=gemini_api_key)
+#     model = genai.GenerativeModel('gemini-2.0-flash')
 
-
+API_KEY = "AIzaSyA16aeBQI9Lq2xDpMcF5nblYL0x2r8aK5k"
+genai.configure(api_key=API_KEY)
+model = genai.GenerativeModel(model_name="gemini-2.0-flash")
 
 # System Prompts for different tables and operations
 SYSTEM_PROMPTS = {
@@ -725,4 +727,5 @@ def show():
                         except Exception as e:
                             st.error(f"An unexpected error occurred: {e}")
                             st.session_state.messages.append({"role": "assistant", "content": "An unexpected error occurred. Please try again."})
+
                             st.rerun()
